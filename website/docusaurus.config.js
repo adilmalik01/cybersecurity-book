@@ -20,11 +20,11 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://adilmalik01.github.io',
+  url: 'https://cybersecurity-book.vercel.app/',
   // url: 'https://your-username.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/cybersecurity-book/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
