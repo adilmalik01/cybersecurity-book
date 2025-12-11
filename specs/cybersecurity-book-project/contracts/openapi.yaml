@@ -1,0 +1,184 @@
+openapi: 3.0.1
+info:
+  title: Cybersecurity Book RAG Chatbot API
+  description: API for the Retrieval-Augmented Generation chatbot that answers questions based on the cybersecurity book content
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+paths:
+  /api/v1/ask:
+    post:
+      summary: Ask a question about cybersecurity topics
+      description: Submit a question and receive an answer based on the book content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question
+              properties:
+                question:
+                  type: string
+                  description: The question about cybersecurity topics
+                  example: "What is the CIA triad in cybersecurity?"
+                context_window:
+                  type: integer
+                  description: Number of previous interactions to include in context
+                  default: 5
+                  example: 3
+      responses:
+        '200':
+          description: Successful response with the answer to the question
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer:
+                    type: string
+                    description: The answer to the question based on book content
+                    example: "The CIA triad consists of Confidentiality, Integrity, and Availability..."
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: List of book sections/chapters used as sources for the answer
+                    example: ["/docs/part-i-foundations/cia-triad.md", "/docs/part-i-foundations/confidentiality.md"]
+                  confidence:
+                    type: number
+                    description: Confidence score for the answer (0-1)
+                    example: 0.95
+        '400':
+          description: Bad request if question is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Question is required"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Failed to process the question"
+  /api/v1/search:
+    post:
+      summary: Search book content
+      description: Search the book content for specific topics or concepts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The search query
+                  example: "penetration testing methodology"
+                limit:
+                  type: integer
+                  description: Maximum number of results to return
+                  default: 10
+                  example: 5
+      responses:
+        '200':
+          description: Successful search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: Title of the content section
+                        content_snippet:
+                          type: string
+                          description: Snippet of the content
+                        source:
+                          type: string
+                          description: Path to the source document
+                        relevance_score:
+                          type: number
+                          description: Relevance score (0-1)
+        '400':
+          description: Bad request if query is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Query is required"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Failed to search the content"
+  /api/v1/chapters:
+    get:
+      summary: Get list of all chapters
+      description: Retrieve a list of all chapters in the book
+      responses:
+        '200':
+          description: List of all chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier for the chapter
+                    title:
+                      type: string
+                      description: Title of the chapter
+                    part:
+                      type: string
+                      description: Part of the book this chapter belongs to
+                    path:
+                      type: string
+                      description: Path to the chapter content
+                    word_count:
+                      type: integer
+                      description: Number of words in the chapter
+                    learning_objectives:
+                      type: array
+                      items:
+                        type: string
+                      description: Learning objectives for this chapter
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Failed to retrieve chapters"

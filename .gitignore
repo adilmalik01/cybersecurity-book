@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+
+# Production builds
+build/
+dist/
+out/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.sock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# TypeScript/Node related
+*.tsbuildinfo
+*.fusebox/
+.sucrase/
+.nyc_output/
+
+# Environment variables
+.env*
+!.env.example
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
+
+# IDE
+.vscode/*
+.idea/*
+*.swp
+*.swo
+*~
+
+# Docusaurus specific
+.cache/
+.docusaurus/
+.temp/
+
+# Lab VMs (if they're local)
+labs/*.ova
+labs/*.ovf
+*.vmdk
+*.vhd
+*.vhdx
+*.vmem
+*.vmsn
+*.vmss
+
+# Documentation builds
+website/build/

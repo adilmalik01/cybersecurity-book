@@ -1,0 +1,38 @@
+.objectivesContainer {
+  border-left: 4px solid #2563eb;
+  background-color: #eff6ff;
+  padding: 1.2rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1.5rem 0;
+}
+
+.objectivesTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #1d4ed8;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.objectivesList {
+  margin-bottom: 0;
+  padding-left: 1.2rem;
+}
+
+.objectiveItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.objectiveIcon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  display: inline-block;
+  min-width: 1.5rem;
+}
+
+.objectiveText {
+  flex: 1;
+}
