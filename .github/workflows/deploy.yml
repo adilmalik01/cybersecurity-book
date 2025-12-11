@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
 
     steps:
@@ -41,10 +40,11 @@ jobs:
         with:
           enablement: false
 
-      # Use the pages-specific upload action (stable). This step does NOT call the deprecated upload-artifact@v3.
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+      # Upload using the new artifact action (v4) — avoids deprecated v3.
+      - name: Upload artifact for Pages (v4)
+        uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: website/build
 
       - name: Deploy to GitHub Pages
